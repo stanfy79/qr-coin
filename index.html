@@ -11,6 +11,8 @@
       padding: 15px;
       margin: 10px;
       border-radius: 10px;
+      height: 110px;
+      overflow: hidden;
       box-shadow: 0 4px 6px rgba(0,0,0,0.2);
       small {
         font-size: 10px;
@@ -19,6 +21,9 @@
     .billboard {
       background: #ffff;
       color: #000;
+      span {
+        font-size: 25px;
+      }
       p {
         color: green;
       }
@@ -76,7 +81,7 @@ console.log(`${weekday}, ${month} ${day}, ${year}`);
 
           if (format === "billboard") {
             widget.innerHTML = `
-              <h2>QR Coin Point</h2>
+              <span>QR Coin Point</span>
               <p>${point} Points</p>
               <small>${weekday} ${day} / ${month} / ${year}</small>
             `;
