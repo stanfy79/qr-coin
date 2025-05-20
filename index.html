@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QR Coin Widget</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* ===== Widget Styles ===== */
+    .qr-widget {
+      font-family: sans-serif;
+      padding: 15px;
+      margin: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .billboard {
+      background: #111;
+      color: #0f0;
+    }
+    .hero {
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      color: white;
+    }
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 20px;
+    }
+    .carousel-item {
+      min-width: 200px;
+      padding: 10px;
+      background: #eee;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Widget Container (Script will inject here) ===== -->
+  <div id="qr-coin-widget-root"></div>
+
+  <!-- ===== JavaScript Code ===== -->
+  <script>
+    (function () {
+      const format = "billboard"; // Change to "hero" or "carousel" as needed
+      const container = document.getElementById("qr-coin-widget-root");
+
+      fetch("https://api.coingecko.com/api/v3/simple/price?ids=qr-coin&vs_currencies=usd")
+        .then(res => res.json())
+        .then(data => {
+          const price = data['qr-coin']?.usd || "N/A";
+          const widget = document.createElement('div');
+          widget.className = `qr-widget ${format}`;
+
+          if (format === "billboard") {
+            widget.innerHTML = `
+              <h2 style="font-size:2rem;">QR Coin Today</h2>
+              <p style="font-size:3rem;">${price}</p>
+            `;
+          } else if (format === "hero") {
+            widget.innerHTML = `
+              <h1 style="font-size:3rem;">QR Coin Point: ${price}</h1>
+              <small>Live from API</small>
+            `;
+          } else if (format === "carousel") {
+            widget.innerHTML = `
+              <div class="carousel">
+                <div class="carousel-item">
+                  <strong>QR Coin</strong>
+                  <div>${price}</div>
+                </div>
+                <div class="carousel-item">Volume: Coming Soon</div>
+                <div class="carousel-item">Market Cap: Coming Soon</div>
+              </div>
+            `;
+          }
+
+          container.appendChild(widget);
+        })
+        .catch(err => {
+          console.error("QR Coin widget error:", err);
+        });
+    })();
+  </script>
+
+</body>
+</html>
