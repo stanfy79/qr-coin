@@ -11,11 +11,11 @@
       padding: 15px;
       margin: 10px;
       border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     }
     .billboard {
-      background: #111;
-      color: #0f0;
+      background: #ffff;
+      color: #000;
     }
     .hero {
       background: linear-gradient(to right, #4facfe, #00f2fe);
@@ -54,12 +54,12 @@
 
           if (format === "billboard") {
             widget.innerHTML = `
-              <h2 style="font-size:2rem;">QR Coin Today</h2>
-              <p style="font-size:3rem;">${price}</p>
+              <h2>QR Coin Today</h2>
+              <p>${price}</p>
             `;
           } else if (format === "hero") {
             widget.innerHTML = `
-              <h1 style="font-size:3rem;">QR Coin Point: ${price}</h1>
+              <h1>QR Coin Point: ${price}</h1>
               <small>Live from API</small>
             `;
           } else if (format === "carousel") {
@@ -69,8 +69,6 @@
                   <strong>QR Coin</strong>
                   <div>${price}</div>
                 </div>
-                <div class="carousel-item">Volume: Coming Soon</div>
-                <div class="carousel-item">Market Cap: Coming Soon</div>
               </div>
             `;
           }
