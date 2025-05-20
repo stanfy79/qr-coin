@@ -12,19 +12,31 @@
       margin: 10px;
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      small {
+        font-size: 10px;
+      }
     }
     .billboard {
       background: #ffff;
       color: #000;
+      p {
+        color: green;
+      }
     }
     .hero {
       background: linear-gradient(to right, #4facfe, #00f2fe);
       color: white;
+      h1 {
+        color: green;
+      }
     }
     .carousel {
       display: flex;
       overflow-x: auto;
       gap: 20px;
+      div {
+        color: green;
+      }
     }
     .carousel-item {
       min-width: 200px;
@@ -41,6 +53,16 @@
 
   <!-- ===== JavaScript Code ===== -->
   <script>
+    const now = new Date();
+
+const day = now.getDate();             // 20
+const month = now.toLocaleString('en-US', { month: 'long' }); // May
+const year = now.getFullYear();        // 2025
+const weekday = now.toLocaleString('en-US', { weekday: 'long' }); // Tuesday
+
+console.log(`${weekday}, ${month} ${day}, ${year}`);
+
+
     (function () {
       const format = "billboard"; // Change to "hero" or "carousel" as needed
       const container = document.getElementById("qr-coin-widget-root");
@@ -48,26 +70,28 @@
       fetch("https://api.coingecko.com/api/v3/simple/price?ids=qr-coin&vs_currencies=usd")
         .then(res => res.json())
         .then(data => {
-          const price = data['qr-coin']?.usd || "N/A";
+          const point = data['qr-coin'] || "N/A";
           const widget = document.createElement('div');
           widget.className = `qr-widget ${format}`;
 
           if (format === "billboard") {
             widget.innerHTML = `
-              <h2>QR Coin Today</h2>
-              <p>${price}</p>
+              <h2>QR Coin Point</h2>
+              <p>${point} Points</p>
+              <small>${weekday} ${day} / ${month} / ${year}</small>
             `;
           } else if (format === "hero") {
             widget.innerHTML = `
-              <h1>QR Coin Point: ${price}</h1>
-              <small>Live from API</small>
+              <h1>QR Coin Point: ${point}</h1>
+              <small>${weekday} ${day} / ${month} / ${year}</small>
             `;
           } else if (format === "carousel") {
             widget.innerHTML = `
               <div class="carousel">
                 <div class="carousel-item">
                   <strong>QR Coin</strong>
-                  <div>${price}</div>
+                  <div>${point}</div>
+                  <small>${weekday} ${day} / ${month} / ${year}</small>
                 </div>
               </div>
             `;
