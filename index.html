@@ -55,7 +55,7 @@
 
   <!-- ===== Widget Container (Script will inject here) ===== -->
   <div id="qr-coin-widget-root"></div>
-
+<span id="scraped-output"></span>
   <!-- ===== JavaScript Code ===== -->
   <script>
     const now = new Date();
@@ -65,7 +65,7 @@ const month = now.toLocaleString('en-US', { month: 'long' }); // May
 const year = now.getFullYear();        // 2025
 const weekday = now.toLocaleString('en-US', { weekday: 'long' }); // Tuesday
 
-    fetch('http://localhost:3000/scrape')
+    fetch('https://stanfy79.github.io/QRcoin-server/scrape')
             .then(response => response.json())
             .then(data => {
                 document.getElementById('scraped-output').textContent = data.data;
