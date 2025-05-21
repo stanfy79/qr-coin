@@ -65,7 +65,7 @@ const month = now.toLocaleString('en-US', { month: 'long' }); // May
 const year = now.getFullYear();        // 2025
 const weekday = now.toLocaleString('en-US', { weekday: 'long' }); // Tuesday
 
-    fetch('https://qrcoinnoserver.vercel.app/server.js/scrape')
+    fetch('https://qrcoinnoserver.vercel.app/api/server')
             .then(response => response.json())
             .then(data => {
                 document.getElementById('scraped-output').textContent = data.data;
