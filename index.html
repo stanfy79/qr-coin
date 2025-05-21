@@ -65,8 +65,17 @@ const month = now.toLocaleString('en-US', { month: 'long' }); // May
 const year = now.getFullYear();        // 2025
 const weekday = now.toLocaleString('en-US', { weekday: 'long' }); // Tuesday
 
+    fetch('http://localhost:3000/scrape')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('scraped-output').textContent = data.data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('scraped-output').textContent = 'Failed to load data.';
+            });
+    
 console.log(`${weekday}, ${month} ${day}, ${year}`);
-
 
     (function () {
       const format = "billboard"; // Change to "hero" or "carousel" as needed
