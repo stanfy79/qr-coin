@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QR Coin Widget</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+    a {
+      text-decoration: none;
+      color: rgb(54, 0, 75);
+    }
+    /* ==== QR Coin Widget Styles ==== */
+.qr-widget {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 16px;
+  margin: 12px;
+  border-radius: 12px;
+  width: 280px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to right, #e0f7fa, #f1f8e9);
+  color: #1a1a1a;
+  transition: all 0.3s ease-in-out;
+}
+
+.qr-widget:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.15);
+}
+
+.qr-widget span {
+  font-size: 20px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+  color: #006064;
+}
+
+.qr-widget p {
+  font-size: 12px;
+  margin: 0;
+  font-weight: 700;
+  color: #400050;
+}
+
+.qr-widget small {
+  display: block;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #555;
+}
+
+/* === Theme Variants === */
+.qr-widget.billboard {
+  background: linear-gradient(135deg, #e1f5fe, #e8f5e9);
+}
+
+.qr-widget.hero {
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  color: white;
+}
+
+.qr-widget.hero h1 {
+  font-size: 24px;
+  margin: 0 0 10px;
+  color: #fff;
+}
+
+.qr-widget.carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+}
+
+.qr-widget .carousel-item {
+  min-width: 200px;
+  background: #fafafa;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  color: #2e7d32;
+}
+
+  </style>
+</head>
+<body>
+
+  <div id="qr-coin-widget-root" class="qr-widget billboard">
+    <div>
+        <span>The QR coin now points to:</span>
+        <a href="warpcast.com/srijan.eth/0x67516f67" id="major-url" target="_blank">
+          <p id="scraped-output">warpcast.com/srijan.eth/0x67516f67</p>
+        </a>
+    </div>
+  </div>
+
+  <script>
+
+    fetch('/api/scrape')
+      .then(res => res.json())
+      .then(data => {
+        // document.getElementById('scraped-output').textContent = data.data;
+        // const majorUrl = document.getElementById('major-url');
+        // majorUrl.setAttribute('href', data.data); // Correct usage
+      })
+      .catch(err => {
+        console.error('Error:', err);
+        document.getElementById('scraped-output').textContent = 'Failed to load data.';
+      });
+  </script>
+</body>
+</html>
